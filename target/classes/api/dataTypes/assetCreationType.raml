@@ -1,0 +1,49 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  assets: 
+   type: array
+   items:  
+     properties:
+        name:
+          type: string
+          required: false
+          description: Asset Name
+        type:
+          type: string
+          required: false
+          description: Asset Type
+        lang:
+          type: string
+          required: false
+          description: Asset Language
+        location:
+          type: string
+          required: false
+          description: Asset Location
+        downloaDate:
+          type: datetime
+          required: false
+          description: Asset Download date (UTC format , UTC-0 time zone)
+        expirationDate:
+          type: datetime
+          required: false
+          description: Asset Expiration date (UTC format , UTC-0 time zone)
+        createDate:
+          type: datetime
+          required: false
+          description: Asset created date (UTC format , UTC-0 time zone)
+        modifiedDate:
+          type: datetime
+          required: false
+          description: Asset Modified date  (UTC format , UTC-0 time zone)
+        ppsite:
+          type: string
+          required: false
+          description: Partner Portal site
+        email:
+          type: string
+          required: false
+          description: Email address
+example: !include ../examples/assestCreationExample.raml                                             
+                                                                      

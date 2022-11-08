@@ -1,0 +1,28 @@
+#%RAML 1.0 Trait
+
+responses: 
+  400:
+    description: The server cannot or will not process the request due to something that is perceived to be a client error.
+    body:
+      application/json:
+        type: !include ../dataTypes/ErrorResponseType.raml
+        example: !include ../examples/Return400Example.raml
+  404:
+    description: The server cannot find the requested resource.
+    body:
+      application/json:
+        type: !include ../dataTypes/ErrorResponseType.raml
+        example: !include ../examples/Return404Example.raml
+  500:
+    description: An internal error occurred while processing the API request.
+    body:
+      application/json:
+        type: !include ../dataTypes/ErrorResponseType.raml
+        example: !include ../examples/Return500Example.raml
+
+  501:
+    description: The method has not been implemented.
+    body:
+      application/json:
+        type: !include ../dataTypes/ErrorResponseType.raml
+        example: !include ../examples/Return501Example.raml             

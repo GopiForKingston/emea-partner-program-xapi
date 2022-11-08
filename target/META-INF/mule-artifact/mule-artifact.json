@@ -1,0 +1,43 @@
+{
+  "configs": [
+    "global.xml",
+    "partner-program-xapi.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:emea-partner-program-xapi:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "log4j2.xml",
+        "global.xml",
+        "partner-program-xapi.xml",
+        "api/dataTypes/partnerPortalLoginUserType.raml",
+        "api/dataTypes/partnerPortalRegistrationType.raml",
+        "api/dataTypes/assetCreationType.raml",
+        "api/dataTypes/partnerPortalLoginUserResType.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/global-resources.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/traits/ErrorResponsesTrait.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/traits/client-IdRequiredTrait.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/dataTypes/ErrorResponseType.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/examples/Return400Example.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/examples/Return501Example.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/examples/Return404Example.raml",
+        "api/exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/examples/Return500Example.raml",
+        "api/partner-program-xapi.raml",
+        "api/examples/assestCreationExample.raml",
+        "api/examples/partnerPortalRegistrationReqExample.raml",
+        "api/examples/partnerPortalLoginUserExample.raml",
+        "api/examples/partnerPortalLoginUserResExample.raml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}
