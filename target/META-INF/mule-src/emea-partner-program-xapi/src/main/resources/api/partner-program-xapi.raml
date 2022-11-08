@@ -1,0 +1,56 @@
+#%RAML 1.0
+title: Partner Program XAPI
+
+description: This API is used by the Partner Program Portal to verify Partner email and capture Partner asset download information. 
+version: v1
+mediaType: application/json
+
+uses: 
+  GlobalResources: exchange_modules/e10ea8d1-2483-423a-93fe-ccc9ba56983d/global-resources/1.0.3/global-resources.raml
+
+types:
+  PartnerPortalLoginUserReq: !include dataTypes/partnerPortalLoginUserType.raml
+  PartnerPortalLoginUserRes: !include dataTypes/partnerPortalLoginUserResType.raml
+  PartnerPortalRegistrationReq: !include dataTypes/partnerPortalRegistrationType.raml
+  PartnerPortalAssetCreationReq: !include dataTypes/assetCreationType.raml
+
+/partner-program:
+  /login:
+    post:
+      is: [GlobalResources.client-id-required,GlobalResources.ErrorResponses]
+      description: Validate the partner logged in to partner portal
+      body:
+        application/json:
+          type: PartnerPortalLoginUserReq
+      responses:
+        200:
+          description: 
+          body:
+            application/json:
+             type: PartnerPortalLoginUserRes    
+  /registration:
+    post:
+      is: [GlobalResources.client-id-required,GlobalResources.ErrorResponses]
+      description: used for registration of the partner in the program
+      body:
+        application/json:
+          type: PartnerPortalRegistrationReq
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                {"message": "Sucessfull"}       
+  /assets-downloads:
+    post:
+      is: [GlobalResources.client-id-required,GlobalResources.ErrorResponses]
+      description: This method adds asset information to contact from Partner Program.
+      body:
+        application/json:
+          type:  PartnerPortalAssetCreationReq
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                {"message" : "Sucessfull"}           

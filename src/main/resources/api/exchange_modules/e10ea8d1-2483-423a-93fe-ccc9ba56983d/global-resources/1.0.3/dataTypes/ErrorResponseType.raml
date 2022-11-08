@@ -1,0 +1,36 @@
+#%RAML 1.0 DataType
+type: object
+displayName: Standard Error Response Format
+description: This data type represents a standard error response format. These properties are NOT required; in other words, each reserved property may appear zero or one times
+properties:
+  response?:
+    type: object
+    properties:
+      application?:
+        type: string
+        description: API name
+        example: "app-name"
+      env?:
+        type: string
+        description: Environment
+        example: "dev | uat | sit"
+      mtransactionId?:
+        type: string
+        description:  Unique transacition / correlation ID
+        example:  "d1839740-859a-11e8-9411-eefd20524153"
+      code?:
+        type: string
+        description: HTTP status code
+        example:  "400"
+      timestamp?:
+        type: string
+        description:  Timestamp of error generated
+        example:  "2018-07-12 11:44:22" 
+      message?:
+        type: string
+        description: A simple message providing error details
+        example: "BAD_REQUEST"
+      description?:
+        type: string
+        description: A human readable message providing in-depth error details
+        example:  "Bad Request due to malformed API request payload"

@@ -1,0 +1,36 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  firstName:
+    type: string
+    description: First name
+  lastName:
+    type: string
+    description: Last name
+  email:
+    type: string
+    description: Email
+  accountName:
+    type: string
+    description: Partner Name
+  language:
+    type: string
+    description: Language
+  jobTitle:
+    type: string
+    description: Job Title 
+  productPreferences:
+    type: string
+    description: Product Preferences
+  country:
+    type: string
+    description: Country
+  accountType:
+    type: string
+    description: Account Type         
+  accountProfile:
+    type: string
+    description: Account Profile 
+
+example: !include ../examples/partnerPortalLoginUserResExample.raml     
+           
