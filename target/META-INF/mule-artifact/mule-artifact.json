@@ -1,7 +1,11 @@
 {
   "configs": [
     "global.xml",
-    "partner-program-xapi.xml"
+    "partner-program-xapi.xml",
+    "errorHandler/global-error-handler.xml",
+    "login.xml",
+    "registration.xml",
+    "asset-downloads.xml"
   ],
   "secureProperties": [],
   "redeploymentEnabled": true,
@@ -16,6 +20,11 @@
         "log4j2.xml",
         "global.xml",
         "partner-program-xapi.xml",
+        "login.xml",
+        "test-properties.yaml",
+        "application-types.xml",
+        "errorHandler/global-error-handler.xml",
+        "asset-downloads.xml",
         "api/dataTypes/partnerPortalLoginUserType.raml",
         "api/dataTypes/partnerPortalRegistrationType.raml",
         "api/dataTypes/assetCreationType.raml",
@@ -32,7 +41,9 @@
         "api/examples/assestCreationExample.raml",
         "api/examples/partnerPortalRegistrationReqExample.raml",
         "api/examples/partnerPortalLoginUserExample.raml",
-        "api/examples/partnerPortalLoginUserResExample.raml"
+        "api/examples/partnerPortalLoginUserResExample.raml",
+        "dev-properties.yaml",
+        "registration.xml"
       ]
     }
   },

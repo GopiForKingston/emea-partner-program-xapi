@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<flow name="registrationFlow" doc:id="6ce50504-0ccf-4a0c-bbdd-58aec14c3933" >
+		<ee:transform doc:name="contactPayload" doc:id="00fca87b-f47e-48f4-b127-8cd7cc793c2a" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="contactPayload" ><![CDATA[%dw 2.0
+output application/json
+---
+{
+
+    "contact": payload.contact filterObject ((value, key, index) -> value != null),
+    "consent": payload.consent filterObject ((value, key, index) -> value != null),
+}]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<ee:transform doc:name="mapConsentInformation" doc:id="56c64c5d-0494-443f-af51-f4311d139aa2" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="contactPayload" ><![CDATA[%dw 2.0
+output application/json
+---
+//payload.contact.firstName [0 to (sizeOf(payload.contact.firstName)- 2)]
+
+vars.contactPayload update {
+        case  customerAudience at .consent.customerAudience ->  (customerAudience reduce ((item, accumulator = "") -> accumulator ++ item ++ ";") ) 
+}  update {
+        case customerAudience at .consent.customerAudience ->  customerAudience [0 to (sizeOf(customerAudience)- 2)] default ""
+}]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<http:request method="POST" doc:name="/contacts" doc:id="a1f408cc-75d3-4497-98ac-752f731b332a" config-ref="HTTP_Request_configuration1" path="/contacts">
+			<http:body ><![CDATA[#[vars.contactPayload]]]></http:body>
+			<http:headers ><![CDATA[#[%dw 2.0
+import p from Mule
+output application/json
+---
+{
+	"client_id": p('secure::sapi.client_id'),
+	"client_secret":p('secure::sapi.client_secret')
+}]]]></http:headers>
+		</http:request>
+		<ee:transform doc:name="extract contactId" doc:id="b04d972d-9864-4dd1-a3eb-ea8685d326ea" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="originalPayload" ><![CDATA[%dw 2.0
+output application/json
+---
+vars.contactPayload ++ 
+
+{
+
+"contactId": payload.contactId,
+"individualId":payload.individualId
+
+}]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+	</flow>
+</mule>

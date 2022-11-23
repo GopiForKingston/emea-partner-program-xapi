@@ -14,8 +14,8 @@ types:
   PartnerPortalRegistrationReq: !include dataTypes/partnerPortalRegistrationType.raml
   PartnerPortalAssetCreationReq: !include dataTypes/assetCreationType.raml
 
-/partner-program:
-  /login:
+
+/login:
     post:
       is: [GlobalResources.client-id-required,GlobalResources.ErrorResponses]
       description: Validate the partner logged in to partner portal
@@ -28,7 +28,7 @@ types:
           body:
             application/json:
              type: PartnerPortalLoginUserRes    
-  /registration:
+/registration:
     post:
       is: [GlobalResources.client-id-required,GlobalResources.ErrorResponses]
       description: used for registration of the partner in the program
@@ -41,7 +41,7 @@ types:
             application/json:
               example:
                 {"message": "Sucessfull"}       
-  /assets-downloads:
+/assets-downloads:
     post:
       is: [GlobalResources.client-id-required,GlobalResources.ErrorResponses]
       description: This method adds asset information to contact from Partner Program.

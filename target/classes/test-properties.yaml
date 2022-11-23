@@ -1,0 +1,14 @@
+api:
+  basePath: "/partner-program-xapi/api/v1"
+  name: "partner-program-xapi"
+  version: "1.0.0"
+  autoDiscoveryId: "18286109"
+  
+
+sapi: 
+  basePath: "/salesforce-sapi/api/v1/sfdc"
+  host: "kingston-dev.prototyped.xyz"
+  port: "8082"
+  
+
+  

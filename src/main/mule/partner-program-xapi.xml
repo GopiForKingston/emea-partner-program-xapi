@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
-     <flow name="partner-program-xapi-main">
-        <http:listener config-ref="httpListenerConfig" path="/api/*">
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
+    <flow name="partner-program-xapi-main">
+        <http:listener config-ref="httpListenerConfig" path="${api.basePath}/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -119,8 +119,9 @@ output application/json
             </on-error-propagate>
         </error-handler>
     </flow>
-    <flow name="post:\partner-program\assets-downloads:application\json:partner-program-xapi-config">
-        <ee:transform>
+	<flow name="post:\assets-downloads:application\json:partner-program-xapi-config">
+        <flow-ref doc:name="asset-downloadsFlow" doc:id="43ad595d-3c37-45cc-bcc6-d4fa2e894b15" name="asset-downloadsFlow" />
+		<ee:transform doc:name="responseMessage">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
@@ -131,36 +132,34 @@ output application/json
             </ee:message>
         </ee:transform>
     </flow>
-    <flow name="post:\partner-program\login:application\json:partner-program-xapi-config">
-        <ee:transform>
+	<flow name="post:\login:application\json:partner-program-xapi-config">
+        <flow-ref doc:name="loginFlow" doc:id="7f867905-2757-4849-953e-f51dd478d763" name="loginFlow" />
+		<ee:transform doc:name="responseMessage">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-{
-  firstName: "peter",
-  lastName: "li",
-  email: "peter_li@le.com",
-  accountName: "company name",
-  language: "english",
-  jobTitle: "Sales Manager",
-  productPreferences: "HyperX Memory",
-  country: "Germany",
-  accountType: "distributor",
-  accountProfile: "Gold,Partner"
-}]]></ee:set-payload>
+payload]]></ee:set-payload>
             </ee:message>
         </ee:transform>
     </flow>
-    <flow name="post:\partner-program\registration:application\json:partner-program-xapi-config">
-        <ee:transform>
+	<flow name="post:\registration:application\json:partner-program-xapi-config">
+        <ee:transform doc:name="setPayload" doc:id="00c9626f-4272-4aab-9aab-83729c84fee7">
+            <ee:message />
+            <ee:variables>
+                <ee:set-variable variableName="originalPayload"><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<flow-ref doc:name="registrationFlow" doc:id="76ec8bd6-309e-4827-bc27-a6e86373e4bb" name="registrationFlow" />
+		<ee:transform doc:name="responseMessage" doc:id="a6645a2c-07a9-482c-bbcf-a8990f341f56">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-{
-  message: "Sucessfull"
-}]]></ee:set-payload>
+vars.originalPayload]]></ee:set-payload>
             </ee:message>
         </ee:transform>
     </flow>
