@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:error-handler-plugin="http://www.mulesoft.org/schema/mule/error-handler-plugin" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/error-handler-plugin http://www.mulesoft.org/schema/mule/error-handler-plugin/current/mule-error-handler-plugin.xsd">
+	<error-handler name="global-error-handlerError_Handler" doc:id="668277d6-81ab-4637-8536-e5913d89579f" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="95d35db3-312d-4294-9c44-82ded52a5731" >
+			<error-handler-plugin:on-error doc:name="Process Error" doc:id="8397fa6d-a6d2-4aa0-8e85-7bdca216ef0e" />
+		</on-error-propagate>
+	</error-handler>
+</mule>

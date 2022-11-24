@@ -1,28 +1,62 @@
 #%RAML 1.0 DataType
 type: object
 properties:
-  firstName:
-    type: string
-    description: First name
-  lastName:
-    type: string
-    description: Last name
-  email:
-    type: string
-    description: Email
-  companyName:
-    type: string
-    description: Company Name
-  language:
-    type: string
-    description: Language
-  jobTitle:
-    type: string
-    description: Job Title 
-  location:
-    type: string
-    description: Country
-  accountType:
-    type: string
-    description: Account Type
-example: !include ../examples/partnerPortalRegistrationReqExample.raml        
+  contact:
+    type: object
+    properties:
+      firstName:
+        type: string
+        description: First name
+        required: false
+      lastName:
+        type: string
+        description: Last name
+        required: false
+      email:
+        type: string
+        description: Email
+        required: false
+      companyName:
+        type: string
+        description: Company Name
+        required: false
+      language:
+        type: string
+        description: Language
+        required: false
+      jobTitle:
+        type: string
+        description: Job Title
+        required: false 
+      location:
+        type: string
+        description: Country
+        required: false
+      accountType:
+        type: string
+        description: Account Type
+        required: false
+  consent:
+    type: object
+    properties:
+      marketingConsent:
+        type: string
+        required: false
+        description: Choose from one of the acceptable marketing consent options.
+        enum:
+          - Unclassified
+          - yes
+          - no
+      partnerProgramCommunication: 
+        type: boolean
+        required: false
+        description: 
+      customerAudience:
+        type: array
+        required: false
+        description: Choose customer audience values from "b2b, b2c, and gaming"
+        items:
+          enum: [b2b, gaming, b2c]
+
+example: !include ../examples/partnerPortalRegistrationReqExample.raml
+
